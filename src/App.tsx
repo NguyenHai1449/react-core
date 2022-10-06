@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { IconContext } from 'react-icons';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import DefaultLayout from './components/layouts/default-layout';
+import ErrorLayout from './components/layouts/error-layout';
+import Home from './pages/home';
+import Login from './pages/login';
+import Register from './pages/register';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <IconContext.Provider value={{}}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<DefaultLayout />}>
+            <Route index element={<Home />}></Route>;
+            <Route path='login' element={<Login />}></Route>;
+            <Route path='register' element={<Register />}></Route>;
+          </Route>
+          <Route path='*' element={<ErrorLayout />} />
+        </Routes>
+      </BrowserRouter>
+    </IconContext.Provider>
   );
-}
+};
 
 export default App;
