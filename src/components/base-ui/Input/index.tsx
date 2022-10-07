@@ -1,37 +1,36 @@
 /** @jsxImportSource @emotion/react */
 import { HTMLInputTypeAttribute } from 'react';
-import { Path, UseFormRegister } from 'react-hook-form';
-import { IFormValues } from '../../form/register';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import { errorColor, inputStyle, labelStyle } from './index.style';
 
 interface InputProps {
+  name: string;
   label: string;
-  field: Path<IFormValues>;
-  register: UseFormRegister<IFormValues>;
+  registerField: UseFormRegisterReturn;
   placeholder?: string;
   errorMessage?: string;
   type?: HTMLInputTypeAttribute;
 }
 
 const Input = ({
-  field,
+  name,
   label,
   placeholder,
-  register,
+  registerField,
   errorMessage,
   ...props
 }: InputProps) => {
   return (
     <>
-      <label css={labelStyle} htmlFor={field}>
+      <label htmlFor={name} css={labelStyle}>
         {label}
       </label>
       <input
-        id={field}
         {...props}
+        {...registerField}
+        id={name}
         autoComplete='off'
         placeholder={placeholder}
-        {...register(field)}
         css={inputStyle}
       />
       <span css={errorColor}>{errorMessage}</span>

@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Input from '../../base-ui/Input';
 import { buttonSubmit, marginBottom } from '../register/index.styles';
+import { Link } from 'react-router-dom';
 
 export interface IFormValues {
   email: string;
@@ -48,24 +49,29 @@ const LoginForm = () => {
     <form css={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
       <div css={marginBottom}>
         <Input
+          name='email'
           label='Email'
-          field='email'
-          register={register}
+          registerField={register('email')}
           errorMessage={errors.email?.message}
         />
       </div>
 
       <div css={marginBottom}>
         <Input
+          name='password'
           type='password'
           label='Password'
-          field='password'
-          register={register}
+          registerField={register('password')}
           errorMessage={errors.password?.message}
         />
       </div>
 
       <input css={buttonSubmit} type='submit' value='Login' />
+
+      <div>
+        Don't have an account?
+        <Link to='/register'>Sign up</Link>
+      </div>
     </form>
   );
 };

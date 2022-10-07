@@ -5,6 +5,7 @@ export const marginBottom = css`
 `;
 
 export const buttonSubmit = css`
+  ${marginBottom}
   border-radius: 5px;
   border: 0;
   padding: 10px;

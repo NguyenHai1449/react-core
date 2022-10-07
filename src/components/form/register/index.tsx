@@ -8,6 +8,7 @@ import Select from '../../base-ui/Select';
 import DatePicker from '../../base-ui/DatePicker';
 import { ageOptions } from '../../../constants/common';
 import { buttonSubmit, gridStyle, marginBottom } from './index.styles';
+import { Link } from 'react-router-dom';
 
 export interface IFormValues {
   firstName: string;
@@ -80,17 +81,17 @@ const RegisterForm = () => {
       <div css={gridStyle}>
         <div>
           <Input
+            name='firstName'
             label='First Name'
-            field='firstName'
-            register={register}
+            registerField={register('firstName')}
             errorMessage={errors.firstName?.message}
           />
         </div>
         <div>
           <Input
             label='Last Name'
-            field='lastName'
-            register={register}
+            name='lastName'
+            registerField={register('lastName')}
             errorMessage={errors.lastName?.message}
           />
         </div>
@@ -99,8 +100,8 @@ const RegisterForm = () => {
       <div css={marginBottom}>
         <Input
           label='Email'
-          field='email'
-          register={register}
+          name='email'
+          registerField={register('email')}
           errorMessage={errors.email?.message}
         />
       </div>
@@ -129,8 +130,8 @@ const RegisterForm = () => {
           <Input
             type='password'
             label='Password'
-            field='password'
-            register={register}
+            name='password'
+            registerField={register('password')}
             errorMessage={errors.password?.message}
           />
         </div>
@@ -138,8 +139,8 @@ const RegisterForm = () => {
           <Input
             type='password'
             label='Confirm Password'
-            field='confirmPassword'
-            register={register}
+            name='confirmPassword'
+            registerField={register('confirmPassword')}
             errorMessage={errors.confirmPassword?.message}
           />
         </div>
@@ -169,6 +170,11 @@ const RegisterForm = () => {
       </div>
 
       <input css={buttonSubmit} type='submit' value='Register' />
+
+      <div>
+        Already have an account?
+        <Link to='/login'>Log in</Link>
+      </div>
     </form>
   );
 };
