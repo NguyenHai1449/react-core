@@ -2,7 +2,7 @@
 import { HTMLInputTypeAttribute } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form';
 import { IFormValues } from '../../form/register';
-import { css } from '@emotion/react';
+import { errorColor, inputStyle, labelStyle } from './index.style';
 
 interface InputProps {
   label: string;
@@ -23,26 +23,18 @@ const Input = ({
 }: InputProps) => {
   return (
     <>
-      <label htmlFor={field}>{label}</label>
+      <label css={labelStyle} htmlFor={field}>
+        {label}
+      </label>
       <input
         id={field}
         {...props}
         autoComplete='off'
         placeholder={placeholder}
         {...register(field)}
-        css={{
-          display: 'block',
-          width: '100%',
-          padding: 10
-        }}
+        css={inputStyle}
       />
-      <span
-        css={{
-          color: 'red'
-        }}
-      >
-        {errorMessage}
-      </span>
+      <span css={errorColor}>{errorMessage}</span>
     </>
   );
 };

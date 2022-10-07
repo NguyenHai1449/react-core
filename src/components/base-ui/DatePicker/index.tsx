@@ -22,7 +22,15 @@ const DatePicker = ({
 }: DatePickerProps) => {
   return (
     <div className={className}>
-      <label htmlFor={name}>{label}</label>
+      <label
+        css={{
+          display: 'block',
+          marginBottom: 5
+        }}
+        htmlFor={name}
+      >
+        {label}
+      </label>
       <Controller
         name={name}
         control={control}
@@ -34,9 +42,10 @@ const DatePicker = ({
               selected={value as Date}
               placeholderText='Select date'
               css={{
-                display: 'block',
                 width: '100%',
-                padding: 10
+                padding: '10px 5px',
+                border: '1px solid rgb(204, 204, 204)',
+                borderRadius: 4
               }}
             />
           );

@@ -22,7 +22,15 @@ const Select = ({
 }: SelectProps) => {
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label
+        css={{
+          display: 'block',
+          marginBottom: 5
+        }}
+        htmlFor={name}
+      >
+        {label}
+      </label>
       <Controller
         name={name}
         control={control}

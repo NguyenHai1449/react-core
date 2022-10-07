@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -8,6 +7,7 @@ import Input from '../../base-ui/Input';
 import Select from '../../base-ui/Select';
 import DatePicker from '../../base-ui/DatePicker';
 import { ageOptions } from '../../../constants/common';
+import { buttonSubmit, gridStyle, marginBottom } from './index.styles';
 
 export interface IFormValues {
   firstName: string;
@@ -19,17 +19,6 @@ export interface IFormValues {
   confirmPassword: string;
   isAgree: boolean;
 }
-
-const divStyle = {
-  marginBottom: 15
-};
-
-const grid = {
-  display: 'grid',
-  gap: 10,
-  marginBottom: 15,
-  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
-};
 
 const schema = yup
   .object({
@@ -88,7 +77,7 @@ const RegisterForm = () => {
 
   return (
     <form css={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-      <div css={grid}>
+      <div css={gridStyle}>
         <div>
           <Input
             label='First Name'
@@ -107,7 +96,7 @@ const RegisterForm = () => {
         </div>
       </div>
 
-      <div css={divStyle}>
+      <div css={marginBottom}>
         <Input
           label='Email'
           field='email'
@@ -116,7 +105,7 @@ const RegisterForm = () => {
         />
       </div>
 
-      <div css={divStyle}>
+      <div css={marginBottom}>
         <Select
           label='Age'
           name='age'
@@ -126,7 +115,7 @@ const RegisterForm = () => {
         />
       </div>
 
-      <div css={divStyle}>
+      <div css={marginBottom}>
         <DatePicker
           label='Birthday'
           name='birthday'
@@ -135,7 +124,7 @@ const RegisterForm = () => {
         />
       </div>
 
-      <div css={grid}>
+      <div css={gridStyle}>
         <div>
           <Input
             type='password'
@@ -156,7 +145,7 @@ const RegisterForm = () => {
         </div>
       </div>
 
-      <div css={divStyle}>
+      <div css={marginBottom}>
         <div>
           <input id='remember' type='checkbox' {...register('isAgree')}></input>
           <label
@@ -179,16 +168,7 @@ const RegisterForm = () => {
         </span>
       </div>
 
-      <input
-        css={{
-          color: 'white',
-          borderRadius: 5,
-          padding: 10,
-          backgroundColor: 'rgb(26, 86, 219)'
-        }}
-        type='submit'
-        value='Register'
-      />
+      <input css={buttonSubmit} type='submit' value='Register' />
     </form>
   );
 };
