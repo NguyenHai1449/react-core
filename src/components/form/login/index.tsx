@@ -63,16 +63,18 @@ const LoginForm = () => {
         css={marginBottom}
         errorMessage={errors.password?.message}
       >
-        <Input id="password" type="password" registerField={register('password')} />
+        <Input
+          id="password"
+          type="password"
+          placeholder="Password"
+          registerField={register('password')}
+        />
       </FormGroup>
 
-      <div css={buttonSubmit}>
-        <input type="submit" value="Login" />
-      </div>
+      <input css={buttonSubmit} type="submit" value="Login" />
 
       <div>
-        Don't have an account?
-        <Link to="/register">Sign up</Link>
+        Don't have an account?<Link to="/register">Sign up</Link>
       </div>
     </form>
   );
