@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import 'react-datepicker/dist/react-datepicker.css';
-import Input from '../../base-ui/Input';
-import Select from '../../base-ui/Select';
-import DatePicker from '../../base-ui/DatePicker';
+import Input from '../../base-ui/input/input';
+import Select from '../../base-ui/select/select';
+import DatePicker from '../../base-ui/date-picker/date-picker';
 import { ageOptions } from '../../../constants/common';
 import { buttonSubmit, gridStyle, marginBottom } from './index.styles';
 import { Link } from 'react-router-dom';
+import FormGroup from '../../base-ui/from-group/from-group';
 
 export interface IFormValues {
   firstName: string;
@@ -39,14 +40,14 @@ const schema = yup
       .string()
       .required('Please enter your password')
       .matches(
-        // no-useless-escape
+        // eslint-disable-next-line
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        'Password must contain at least 8 characters, one uppercase, one number and one special case character'
+        'Password must contain at least 8 characters, one uppercase, one number and one special case character',
       ),
     confirmPassword: yup
       .string()
       .required('Please confirm your password')
-      .oneOf([yup.ref('password'), null], "Passwords don't match.")
+      .oneOf([yup.ref('password'), null], "Passwords don't match."),
   })
   .required();
 
@@ -57,10 +58,10 @@ const RegisterForm = () => {
     handleSubmit,
     formState: { errors },
     setError,
-    reset
+    reset,
   } = useForm<IFormValues>({
     mode: 'all',
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: IFormValues) => {
@@ -68,7 +69,7 @@ const RegisterForm = () => {
     if (!data.isAgree) {
       setError('isAgree', {
         type: 'custom',
-        message: 'Please agree to the terms and conditions'
+        message: 'Please agree to the terms and conditions',
       });
       return;
     }
@@ -79,101 +80,82 @@ const RegisterForm = () => {
   return (
     <form css={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
       <div css={gridStyle}>
-        <div>
-          <Input
-            name='firstName'
-            label='First Name'
-            registerField={register('firstName')}
-            errorMessage={errors.firstName?.message}
-          />
-        </div>
-        <div>
-          <Input
-            label='Last Name'
-            name='lastName'
-            registerField={register('lastName')}
-            errorMessage={errors.lastName?.message}
-          />
-        </div>
+        <FormGroup label="First Name" htmlFor="firstName" errorMessage={errors.firstName?.message}>
+          <Input id="firstName" placeholder="First Name" registerField={register('firstName')} />
+        </FormGroup>
+
+        <FormGroup label="Last Name" htmlFor="lastName" errorMessage={errors.lastName?.message}>
+          <Input id="lastName" placeholder="Last Name" registerField={register('lastName')} />
+        </FormGroup>
       </div>
 
-      <div css={marginBottom}>
-        <Input
-          label='Email'
-          name='email'
-          registerField={register('email')}
-          errorMessage={errors.email?.message}
-        />
-      </div>
+      <FormGroup
+        label="Email"
+        htmlFor="email"
+        css={marginBottom}
+        errorMessage={errors.email?.message}
+      >
+        <Input id="email" placeholder="Email" registerField={register('email')} />
+      </FormGroup>
 
-      <div css={marginBottom}>
-        <Select
-          label='Age'
-          name='age'
-          control={control}
-          options={ageOptions}
-          errorMessage={errors.age?.message}
-        />
-      </div>
+      <FormGroup label="Age" htmlFor="age" css={marginBottom} errorMessage={errors.age?.message}>
+        <Select name="age" placeholder="Age" control={control} options={ageOptions} />
+      </FormGroup>
 
-      <div css={marginBottom}>
-        <DatePicker
-          label='Birthday'
-          name='birthday'
-          control={control}
-          errorMessage={errors.birthday?.message}
-        />
-      </div>
+      <FormGroup
+        label="Birthday"
+        htmlFor="birthday"
+        css={marginBottom}
+        errorMessage={errors.birthday?.message}
+      >
+        <DatePicker placeholder="Birthday" name="birthday" control={control} />
+      </FormGroup>
 
       <div css={gridStyle}>
-        <div>
+        <FormGroup
+          label="Password"
+          htmlFor="password"
+          css={marginBottom}
+          errorMessage={errors.password?.message}
+        >
+          <Input id="password" placeholder="Password" registerField={register('password')} />
+        </FormGroup>
+        <FormGroup
+          css={marginBottom}
+          label="Confirm password"
+          htmlFor="confirmPassword"
+          errorMessage={errors.confirmPassword?.message}
+        >
           <Input
-            type='password'
-            label='Password'
-            name='password'
-            registerField={register('password')}
-            errorMessage={errors.password?.message}
-          />
-        </div>
-        <div>
-          <Input
-            type='password'
-            label='Confirm Password'
-            name='confirmPassword'
+            id="confirmPassword"
+            placeholder="Confirm password"
             registerField={register('confirmPassword')}
-            errorMessage={errors.confirmPassword?.message}
           />
-        </div>
+        </FormGroup>
       </div>
 
       <div css={marginBottom}>
         <div>
-          <input id='remember' type='checkbox' {...register('isAgree')}></input>
-          <label
-            htmlFor='remember'
-            className='ml-2 text-md font-medium text-gray-900'
-          >
+          <input id="remember" type="checkbox" {...register('isAgree')}></input>
+          <label htmlFor="remember" className="ml-2 text-md font-medium text-gray-900">
             I agree to the{' '}
-            <span className='text-blue-600 hover:underline'>
-              Terms and Conditions
-            </span>
-            .
+            <span className="text-blue-600 hover:underline">Terms and Conditions</span>.
           </label>
         </div>
         <span
           css={{
-            color: 'red'
+            color: 'red',
           }}
         >
           {errors.isAgree?.message}
         </span>
       </div>
 
-      <input css={buttonSubmit} type='submit' value='Register' />
+      <input css={buttonSubmit} type="submit" value="Register" />
 
       <div>
         Already have an account?
-        <Link to='/login'>Log in</Link>
+        <Link to="/login">Log in</Link>
       </div>
     </form>
   );

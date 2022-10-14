@@ -2,9 +2,10 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import Input from '../../base-ui/Input';
+import Input from '../../base-ui/input/input';
 import { buttonSubmit, marginBottom } from '../register/index.styles';
 import { Link } from 'react-router-dom';
+import FormGroup from '../../base-ui/from-group/from-group';
 
 export interface IFormValues {
   email: string;
@@ -21,10 +22,10 @@ const schema = yup
       .string()
       .required('Please enter your password')
       .matches(
-        // no-useless-escape
+        // eslint-disable-next-line
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        'Password must contain at least 8 characters, one uppercase, one number and one special case character'
-      )
+        'Password must contain at least 8 characters, one uppercase, one number and one special case character',
+      ),
   })
   .required();
 
@@ -33,9 +34,9 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<IFormValues>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: IFormValues) => {
@@ -47,30 +48,31 @@ const LoginForm = () => {
 
   return (
     <form css={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-      <div css={marginBottom}>
-        <Input
-          name='email'
-          label='Email'
-          registerField={register('email')}
-          errorMessage={errors.email?.message}
-        />
-      </div>
+      <FormGroup
+        label="Email"
+        htmlFor="email"
+        css={marginBottom}
+        errorMessage={errors.email?.message}
+      >
+        <Input id="email" placeholder="Email" registerField={register('email')} />
+      </FormGroup>
 
-      <div css={marginBottom}>
-        <Input
-          name='password'
-          type='password'
-          label='Password'
-          registerField={register('password')}
-          errorMessage={errors.password?.message}
-        />
-      </div>
+      <FormGroup
+        label="Password"
+        htmlFor="password"
+        css={marginBottom}
+        errorMessage={errors.password?.message}
+      >
+        <Input id="password" type="password" registerField={register('password')} />
+      </FormGroup>
 
-      <input css={buttonSubmit} type='submit' value='Login' />
+      <div css={buttonSubmit}>
+        <input type="submit" value="Login" />
+      </div>
 
       <div>
         Don't have an account?
-        <Link to='/register'>Sign up</Link>
+        <Link to="/register">Sign up</Link>
       </div>
     </form>
   );
