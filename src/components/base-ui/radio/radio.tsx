@@ -2,7 +2,7 @@
 interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
   text?: string;
   isChecked?: boolean;
-  handleChange: (id: string) => void;
+  handleChange?: (id: string) => void;
 }
 
 const Radio = (props: RadioProps) => {
@@ -14,7 +14,7 @@ const Radio = (props: RadioProps) => {
         id={id}
         type="radio"
         checked={isChecked}
-        onChange={e => handleChange(e.currentTarget.id)}
+        onChange={e => handleChange && handleChange(e.currentTarget.id)}
       />
       <label htmlFor={id}>{text}</label>
     </div>

@@ -8,7 +8,7 @@ export const buttonSubmit = css`
   ${marginBottom}
   border-radius: 5px;
   border: 0;
-  padding: 10px;
+  padding: 10px 20px;
   color: white;
   background-color: rgb(26, 86, 219);
   &:hover {

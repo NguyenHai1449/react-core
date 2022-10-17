@@ -9,7 +9,8 @@ import DatePicker from '../../base-ui/date-picker/date-picker';
 import { ageOptions } from '../../../constants/common';
 import { buttonSubmit, gridStyle, marginBottom } from './index.styles';
 import { Link } from 'react-router-dom';
-import FormGroup from '../../base-ui/from-group/from-group';
+import FormGroup from '../../base-ui/form-group/form-group';
+import Button from '../../base-ui/button/button';
 
 export interface IFormValues {
   firstName: string;
@@ -151,7 +152,7 @@ const RegisterForm = () => {
         </span>
       </div>
 
-      <input css={buttonSubmit} type="submit" value="Register" />
+      <Button css={buttonSubmit} type="submit" value="Register" />
 
       <div>
         Already have an account?<Link to="/login">Log in</Link>

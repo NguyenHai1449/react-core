@@ -1,27 +1,26 @@
 /** @jsxImportSource @emotion/react */
 
-interface ButtonProps {
-  text: string;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit';
   Icon?: any;
   onClick?: () => void;
 }
 
-const Button = ({ type = 'button', text, Icon, ...props }: ButtonProps) => {
+const Button = (props: ButtonProps) => {
+  const { value, Icon, ...rest } = props;
   return (
     <>
       <button
-        {...props}
-        type={type}
+        {...rest}
         css={{
           padding: 10,
           display: 'flex',
           alignItems: 'center',
-          gap: 10
+          gap: 10,
         }}
       >
         {Icon && <Icon />}
-        <span>{text}</span>
+        <span>{value}</span>
       </button>
     </>
   );

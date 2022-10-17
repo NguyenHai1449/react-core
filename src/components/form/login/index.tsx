@@ -5,7 +5,8 @@ import * as yup from 'yup';
 import Input from '../../base-ui/input/input';
 import { buttonSubmit, marginBottom } from '../register/index.styles';
 import { Link } from 'react-router-dom';
-import FormGroup from '../../base-ui/from-group/from-group';
+import FormGroup from '../../base-ui/form-group/form-group';
+import Button from '../../base-ui/button/button';
 
 export interface IFormValues {
   email: string;
@@ -71,7 +72,7 @@ const LoginForm = () => {
         />
       </FormGroup>
 
-      <input css={buttonSubmit} type="submit" value="Login" />
+      <Button css={buttonSubmit} type="submit" value="Login" />
 
       <div>
         Don't have an account?<Link to="/register">Sign up</Link>

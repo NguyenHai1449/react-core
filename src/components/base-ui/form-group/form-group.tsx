@@ -14,7 +14,7 @@ const FormGroup = (props: FormGroupProps) => {
     <div className={`form-group ${className}`}>
       <label htmlFor={htmlFor}>{label}:</label>
       {children}
-      <span role='alert' css={{ color: 'red' }}>
+      <span role="alert" css={{ color: 'red' }}>
         {errorMessage}
       </span>
     </div>

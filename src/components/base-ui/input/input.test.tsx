@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react';
 import Input from './input';
 
-test('renders component', () => {
-  render(<Input />);
+describe('Input', () => {
+  test('render input not crash', () => {
+    render(<Input />);
+  });
 });
